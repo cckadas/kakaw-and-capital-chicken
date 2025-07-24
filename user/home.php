@@ -380,6 +380,7 @@ $products = $prodStmt->fetchAll(PDO::FETCH_ASSOC);
       <a href="account.php">Account</a>
       <a href="order_history.php">Order History</a>
       <a href="logout.php">Log Out</a>
+      <a href="feedback.php">Send Feedback</a>
     </div>
   </nav>
   <div class="overlay" id="overlay" onclick="closeMenu()"></div>
