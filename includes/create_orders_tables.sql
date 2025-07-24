@@ -45,3 +45,13 @@ CREATE TABLE order_items (
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- SANITATION CHECKLIST TABLE
+CREATE TABLE sanitation_checklist ( 
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    area VARCHAR(100) NOT NULL, 
+    task_name VARCHAR(200) NOT NULL, 
+    day_of_week ENUM('MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN') NOT NULL, 
+    is_completed BOOLEAN DEFAULT FALSE, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );

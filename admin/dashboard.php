@@ -49,6 +49,7 @@ if (!isset($_SESSION['admin_id'])) {
         <a href="products.php">Products</a>
         <a href="orders.php">Orders</a>
         <a href="accounts.php">Accounts</a>
+        <a href ="sanitation.php">Sanitation</a>
         <a href="logout.php" class="logout">Log Out</a>
       </nav>
     </div>

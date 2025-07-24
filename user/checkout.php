@@ -14,6 +14,15 @@ $stmt = $conn->prepare("SELECT full_name, address, email FROM users WHERE id = ?
 $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Prepare the cart data
+$initial_cart_from_session = '{}';
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    // Pass the cart data to the client-side
+    $initial_cart_from_session = json_encode($_SESSION['cart']);
+    // Clear the cart in session
+    unset($_SESSION['cart']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -226,8 +235,18 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
   </div>
   <script>
-    // Load cart from localStorage
-    let cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    // Get initial cart from session
+    const initialCartFromSession = <?php echo $initial_cart_from_session; ?>;
+
+    // Initialize cart
+    let cart;
+    if (Object.keys(initialCartFromSession).length > 0) {
+        cart = initialCartFromSession; // Use the cart data from the session
+        saveCart(); // Save to localStorage
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart') || '{}'); // Use the cart data from localStorage
+    }
+
     function saveCart() {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
@@ -289,7 +308,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     document.getElementById('time').value = pad(now.getHours()) + ':' + pad(now.getMinutes());
 
     document.getElementById('proceedBtn').onclick = function() {
-      // Save details to sessionStorage for payment page
+      // Save customer details
       const details = {
         fullName: document.getElementById('fullName').value,
         address: document.getElementById('address').value,
