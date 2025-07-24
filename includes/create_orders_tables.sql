@@ -55,3 +55,13 @@ CREATE TABLE sanitation_checklist (
     is_completed BOOLEAN DEFAULT FALSE, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+
+--FEEDBACK TABLE
+CREATE TABLE feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT DEFAULT NULL,
+    submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    feedback_text TEXT NOT NULL,
+    rating ENUM('MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
