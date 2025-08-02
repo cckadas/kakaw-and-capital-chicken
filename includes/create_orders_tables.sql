@@ -62,6 +62,6 @@ CREATE TABLE feedback (
     user_id INT DEFAULT NULL,
     submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     feedback_text TEXT NOT NULL,
-    rating ENUM('MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'),
+    rating ENUM('1', '2', '3', '4', '5'),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
